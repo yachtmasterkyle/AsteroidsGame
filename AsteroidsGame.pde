@@ -1,15 +1,47 @@
-//your variable declarations here
+Spaceship antidisestablishmentarianism = new Spaceship; //your variable declarations here
 public void setup() 
 {
-  //your code here
+  size(600, 600)
+  background(0);//your code here
 }
 public void draw() 
 {
-  //your code here
+  background(0);//your code here
+  antidisestablishmentarianism.show();
+  antidisestablishmentarianism.move();
 }
-class SpaceShip //extends Floater  
+class SpaceShip extends Floater  
 {   
-    //your code here
+  public Spaceship()
+  {
+    corners = 4;  //the number of corners, a triangular floater has 3   
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    [0] xCorners = -8;   
+    [0] yCorners = -8;   
+    [1] xCorners = -4;   
+    [1] yCorners = 0;   
+    [2] xCorners = -8;   
+    [2] yCorners = 8;
+    [3] xCorners = 16;     
+    [3] yCorners = 0;
+    myColor = (223,217,217);
+    myCenterX = 300;
+    myCenterY = 300;
+    myDirectionX = 0;
+    myDirectionY = 0;
+    myPointDirection = 0;
+  }
+    public void setX(int x){myCenterX = x;}
+    public int getX(){return (int)myCenterX;}
+    public void setY(int y){myCenterY = y;}
+    public int getY(){return (int)myCenterY;}
+    public void setDirectionX(double x){myDirectionX = x;}
+    public double getDirectionX(){return myDirectionX;}
+    public void setDirectionY(double y){myDirectionY = y;}
+    public double getDirectionY(){return myDirectionY;}
+    public void setPointDirection(int degrees){myPointDirection = degrees;}   
+    public double getPointDirection(){return myPointDirection;} 
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -87,4 +119,30 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     endShape(CLOSE);  
   }   
 } 
+public void keyPressed()
+{
+  if(keyCode == 83)
+  {
+    antidisestablishmentarianism.accelerate(-.1);
+  }
+  if(keyCode == 87)
+  {
+    antidisestablishmentarianism.accelerate(.1);
+  }
+  if(keyCode == 65)
+  {
+    antidisestablishmentarianism.rotate(-10);
+  }
+  if(keyCode == 68)
+  {
+    antidisestablishmentarianism.rotate(10);
+  }
+  if(keyCode == 32)
+  {
+    antidisestablishmentarianism.setX((int)(Math.random() * 300));
+    antidisestablishmentarianism.setY((int)(Math.random() * 300));
+    antidisestablishmentarianism.setDirectionX(0);
+    antidisestablishmentarianism.setDirectionY(0);
+    antidisestablishmentarianism.setPointDirection((int)(Math.random() * 360));
+  }
 
