@@ -1,31 +1,55 @@
-Spaceship antidisestablishmentarianism = new Spaceship; //your variable declarations here
+SpaceShip antidisestablishmentarianism = new SpaceShip(); //your variable declarations here
+Star [] space;
+Asteroid [] roids;
+int numStars = 50;
+int numAsteroids = 25;
 public void setup() 
 {
-  size(600, 600)
+  size(600, 600);
   background(0);//your code here
+  roids = new Asteroid[numAsteroids];
+  space = new Star[numStars];
+  for(int i=0; i < numStars; i++)
+  {
+    space[i] = new Star();
+  }
+  for(int i = 0; i < numAsteroids; i++)
+  {
+    roids[i] = new Asteroid();
+  }
 }
 public void draw() 
 {
   background(0);//your code here
   antidisestablishmentarianism.show();
   antidisestablishmentarianism.move();
+  for(int i=0; i < numStars; i++)
+  {
+    space[i].show();
+  }
+  for(int i = 0; i < numAsteroids; i++)
+  {
+    roids[i].move();
+    roids[i].show();
+  }
 }
 class SpaceShip extends Floater  
 {   
-  public Spaceship()
+  public SpaceShip()
   {
     corners = 4;  //the number of corners, a triangular floater has 3   
     xCorners = new int[corners];
     yCorners = new int[corners];
-    [0] xCorners = -8;   
-    [0] yCorners = -8;   
-    [1] xCorners = -4;   
-    [1] yCorners = 0;   
-    [2] xCorners = -8;   
-    [2] yCorners = 8;
-    [3] xCorners = 16;     
-    [3] yCorners = 0;
-    myColor = (223,217,217);
+    xCorners[0] = -8;   
+    yCorners[0] = -8;   
+    xCorners[1] = -4;   
+    yCorners[1] = 0;   
+    xCorners[2] = -8;   
+    yCorners[2] = 8;
+    xCorners[3] = 16;     
+    yCorners[3] = 0;
+    myColor = (255);
+   // myColor = (223,217,217);
     myCenterX = 300;
     myCenterY = 300;
     myDirectionX = 0;
@@ -62,7 +86,6 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   abstract public double getDirectionY();   
   abstract public void setPointDirection(int degrees);   
   abstract public double getPointDirection(); 
-
   //Accelerates the floater in the direction it is pointing (myPointDirection)   
   public void accelerate (double dAmount)   
   {          
@@ -117,8 +140,8 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
       vertex(xRotatedTranslated,yRotatedTranslated);    
     }   
     endShape(CLOSE);  
-  }   
-} 
+  }    
+}
 public void keyPressed()
 {
   if(keyCode == 83)
@@ -145,4 +168,81 @@ public void keyPressed()
     antidisestablishmentarianism.setDirectionY(0);
     antidisestablishmentarianism.setPointDirection((int)(Math.random() * 360));
   }
-
+}
+  class Star
+  {
+    protected int myX, myY;
+    public void setX(int x) {myX = x;}
+    public int get (){return myX;}
+    public void setY(int y){myY = y;}
+    public int getY(){return myY;}
+    public Star()
+    {
+      myX = (int)(Math.random()*600);
+      myY = (int)(Math.random()*600);
+    }
+    public void show()
+    {
+      fill(255);
+      ellipse(myX, myY, 2, 2);
+    }
+  }
+  class Asteroid extends Floater
+  {
+    private int rotateSpeed;
+    public void setX(int x){myCenterX = x;}
+    public int getX(){return (int)myCenterX;}
+    public void setY(int y){myCenterY = y;}
+    public int getY(){return (int)myCenterY;}
+    public void setDirectionX(double x){myDirectionX = x;}
+    public double getDirectionX(){return myDirectionX;}
+    public void setDirectionY(double y){myDirectionY = y;}
+    public double getDirectionY(){return myDirectionY;}   
+    public void setPointDirection(int degrees){myPointDirection = degrees;}   
+    public double getPointDirection(){return myPointDirection;} 
+    public Asteroid()
+    {
+      rotateSpeed = (int)(Math.random() * 8 - 4);
+      corners = 6;
+      xCorners = new int[corners];
+      yCorners = new int[corners];
+      xCorners[0] = -20;
+      yCorners[0] = 0;
+      xCorners[1] = -16;
+      yCorners[1] = -12;
+      xCorners[2] = 2;
+      yCorners[2] = -8;
+      xCorners[3] = 8;
+      yCorners[3] = 8;
+      xCorners[4] = 2;
+      yCorners[4] = 6;
+      xCorners[5] = -8;
+      yCorners[5] = 1;
+      myColor = (255);
+      myCenterX = (int)(Math.random()*600);
+      myCenterY = (int)(Math.random()*600);
+      myDirectionX = Math.random()*2-1;
+      myDirectionY = Math.random()*2-1;
+      myPointDirection = (int)(Math.random()*Math.PI/180);
+    }
+    public void show()
+    {
+      noFill();   
+      stroke(255);     
+      double dRadians = myPointDirection*(Math.PI/180);                 
+      int xRotate, yRotate;    
+      beginShape();         
+      for(int nI = 0; nI < corners; nI++)    
+      {     
+        xRotate = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
+        yRotate = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
+        vertex(xRotate, yRotate);    
+      }   
+      endShape(CLOSE);  
+    }
+    public void move()
+    {
+      rotate(rotateSpeed);
+      super.move();
+    }
+  }
