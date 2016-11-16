@@ -203,21 +203,41 @@ public void keyPressed()
     public Asteroid()
     {
       rotateSpeed = (int)(Math.random() * 8 - 4);
-      corners = 6;
+      corners = 16;
       xCorners = new int[corners];
       yCorners = new int[corners];
-      xCorners[0] = -20;
-      yCorners[0] = 0;
-      xCorners[1] = -16;
-      yCorners[1] = -12;
-      xCorners[2] = 2;
-      yCorners[2] = -8;
-      xCorners[3] = 8;
-      yCorners[3] = 8;
-      xCorners[4] = 2;
-      yCorners[4] = 6;
-      xCorners[5] = -8;
+      xCorners[0] = 4;
+      yCorners[0] = 3;
+      xCorners[1] = 4;
+      yCorners[1] = 5;
+      xCorners[2] = 7;
+      yCorners[2] = 5;
+      xCorners[3] = 7;
+      yCorners[3] = 3;
+      xCorners[4] = 11;
+      yCorners[4] = 3;
+      xCorners[5] = 11;
       yCorners[5] = 1;
+      xCorners[6] = 6;
+      yCorners[6] = -1;
+      xCorners[7] = 3;
+      yCorners[7] = -4;
+      xCorners[8] = -5;
+      yCorners[8] = -4;
+      xCorners[9] = -6;
+      yCorners[9] = -1;
+      xCorners[10] = -10;
+      yCorners[10] = 1;
+      xCorners[11] = -10;
+      yCorners[11] = 3;
+      xCorners[12] = -7;
+      yCorners[12] = 3;
+      xCorners[13] = -7;
+      yCorners[13] = 5;
+      xCorners[14] = -4;
+      yCorners[14] = 5;
+      xCorners[15] = -4;
+      yCorners[15] = 3;
       myColor = (255);
       myCenterX = (int)(Math.random()*600);
       myCenterY = (int)(Math.random()*600);
@@ -226,8 +246,7 @@ public void keyPressed()
       myPointDirection = (int)(Math.random()*Math.PI/180);
     }
     public void show()
-    {
-      noFill();   
+    { 
       stroke(255);     
       double dRadians = myPointDirection*(Math.PI/180);                 
       int xRotate, yRotate;    
