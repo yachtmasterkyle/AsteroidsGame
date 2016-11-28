@@ -1,13 +1,12 @@
 SpaceShip antidisestablishmentarianism = new SpaceShip(); //your variable declarations here
 Star [] space;
-Asteroid [] roids;
 int numStars = 50;
 int numAsteroids = 25;
+ArrayList <Asteroid> roids = new ArrayList <Asteroid>();
 public void setup() 
 {
   size(600, 600);
   background(0);//your code here
-  roids = new Asteroid[numAsteroids];
   space = new Star[numStars];
   for(int i=0; i < numStars; i++)
   {
@@ -15,7 +14,7 @@ public void setup()
   }
   for(int i = 0; i < numAsteroids; i++)
   {
-    roids[i] = new Asteroid();
+    roids.add(new Asteroid());
   }
 }
 public void draw() 
@@ -29,8 +28,8 @@ public void draw()
   }
   for(int i = 0; i < numAsteroids; i++)
   {
-    roids[i].move();
-    roids[i].show();
+    roids.get(i).show();
+    roids.get(i).move();
   }
 }
 class SpaceShip extends Floater  
