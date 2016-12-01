@@ -26,10 +26,14 @@ public void draw()
   {
     space[i].show();
   }
-  for(int i = 0; i < numAsteroids; i++)
+  for(int i = 0; i < roids.size(); i++)
   {
     roids.get(i).show();
     roids.get(i).move();
+    if(dist(roids.get(i).getX(), roids.get(i).getY(), antidisestablishmentarianism.getX(), antidisestablishmentarianism.getY()) <= 20)
+    {
+      roids.remove(i);
+    }
   }
 }
 class SpaceShip extends Floater  
