@@ -180,7 +180,7 @@ public void keyPressed()
   {
     antidisestablishmentarianism.rotate(10);
   }
-  if(keyCode == 32)
+  if(keyCode == 69)
   {
     antidisestablishmentarianism.setX((int)(Math.random() * 300));
     antidisestablishmentarianism.setY((int)(Math.random() * 300));
@@ -188,7 +188,7 @@ public void keyPressed()
     antidisestablishmentarianism.setDirectionY(0);
     antidisestablishmentarianism.setPointDirection((int)(Math.random() * 360));
   }
-  if(keyCode == 69)
+  if(keyCode == 32)
   {
     laser.add(new Bullet());
   }
