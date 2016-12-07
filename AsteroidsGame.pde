@@ -3,6 +3,7 @@ Star [] space;
 int numStars = 50;
 int numAsteroids = 25;
 ArrayList <Asteroid> roids = new ArrayList <Asteroid>();
+ArrayList <Bullet> laser = new ArrayList <Bullet>();
 public void setup() 
 {
   size(600, 600);
@@ -12,7 +13,7 @@ public void setup()
   {
     space[i] = new Star();
   }
-  for(int i = 0; i < numAsteroids; i++)
+  for(int c = 0; c < numAsteroids; c++)
   {
     roids.add(new Asteroid());
   }
@@ -22,17 +23,34 @@ public void draw()
   background(0);//your code here
   antidisestablishmentarianism.show();
   antidisestablishmentarianism.move();
-  for(int i=0; i < numStars; i++)
+  for(int i = 0; i < numStars; i++)
   {
     space[i].show();
   }
-  for(int i = 0; i < roids.size(); i++)
+  for(int c = 0; c < roids.size(); c++)
   {
-    roids.get(i).show();
-    roids.get(i).move();
-    if(dist(roids.get(i).getX(), roids.get(i).getY(), antidisestablishmentarianism.getX(), antidisestablishmentarianism.getY()) <= 20)
+    roids.get(c).show();
+    roids.get(c).move();
+    if(dist(roids.get(c).getX(), roids.get(c).getY(), antidisestablishmentarianism.getX(), antidisestablishmentarianism.getY()) <= 20)
     {
-      roids.remove(i);
+      roids.remove(c);
+    }
+  }
+  for(int a = 1; a < laser.size(); a++)
+  {
+    laser.get(a).show();
+    laser.get(a).move();
+  }
+  for(int i = 1; i < roids.size(); i++)
+  {
+    for(int j = 0; j < laser.size(); j++)
+    {
+      if(dist((float)laser.get(j).getX(), (float)laser.get(j).getY(), (float)roids.get(i).getX(), (float)roids.get(i).getY()) < 15)
+      {
+        laser.remove(j);
+        roids.remove(i);
+        break;
+      }
     }
   }
 }
@@ -51,8 +69,7 @@ class SpaceShip extends Floater
     yCorners[2] = 8;
     xCorners[3] = 16;     
     yCorners[3] = 0;
-    myColor = (255);
-   // myColor = (223,217,217);
+    myColor = color(104, 124, 179);
     myCenterX = 300;
     myCenterY = 300;
     myDirectionX = 0;
@@ -110,7 +127,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     myCenterY += myDirectionY;     
 
     //wrap around screen    
-    if(myCenterX >width)
+    if(myCenterX > width)
     {     
       myCenterX = 0;    
     }    
@@ -118,7 +135,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     {     
       myCenterX = width;    
     }    
-    if(myCenterY >height)
+    if(myCenterY > height)
     {    
       myCenterY = 0;    
     }   
@@ -170,6 +187,10 @@ public void keyPressed()
     antidisestablishmentarianism.setDirectionX(0);
     antidisestablishmentarianism.setDirectionY(0);
     antidisestablishmentarianism.setPointDirection((int)(Math.random() * 360));
+  }
+  if(keyCode == 69)
+  {
+    laser.add(new Bullet());
   }
 }
   class Star
